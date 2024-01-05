@@ -1,0 +1,106 @@
+from tkinter import*
+root=Tk()
+root.geometry("295x555")
+root.configure(bg="grey")
+root.title("Calculator ")
+def click(event):
+    global scvalue
+    text = event.widget.cget("text")
+    print(text)
+    if text == "=":
+        if scvalue.get().isdigit():
+            value=int(scvalue.get())
+        else:
+            value=eval(screen.get())
+        scvalue.set(value)
+        screen.update()
+    elif text =="C":
+        scvalue.set("")
+        screen.update()
+    else:
+        scvalue.set(scvalue.get()+text)
+        screen.update()
+
+
+
+
+
+scvalue=StringVar()
+scvalue.set("")
+screen=Entry(root,textvar=scvalue,font="lucida 40 bold",bg="yellow",fg="green")
+screen.pack(fill=X)
+
+f1=Frame(root,bg="grey")
+b1=Button(f1,text="9",font="lucida 30 bold",bg="red",fg="white")
+b1.pack(side=LEFT,ipadx=15,fill=X)
+b1.bind("<Button-1>",click)
+b2=Button(f1,text="8",font="lucida 30 bold",bg="red",fg="white")
+b2.pack(side=LEFT,ipadx=15,fill=X)
+b2.bind("<Button-1>",click)
+b3=Button(f1,text="7",font="lucida 30 bold",bg="red",fg="white")
+b3.pack(side=LEFT,ipadx=15,fill=X)
+b3.bind("<Button-1>",click)
+f1.pack()
+
+
+
+f2=Frame(root,bg="grey")
+b4=Button(f2,text="6",font="lucida 30 bold",bg="red",fg="white")
+b4.pack(side=LEFT,ipadx=15,fill=X)
+b4.bind("<Button-1>",click)
+b5=Button(f2,text="5",font="lucida 30 bold",bg="red",fg="white")
+b5.pack(side=LEFT,ipadx=15,fill=X)
+b5.bind("<Button-1>",click)
+b6=Button(f2,text="4",font="lucida 30 bold",bg="red",fg="white")
+b6.pack(side=LEFT,ipadx=15,fill=X)
+b6.bind("<Button-1>",click)
+f2.pack()
+
+f3=Frame(root,bg="grey")
+b7=Button(f3,text="3",font="lucida 30 bold",bg="red",fg="white")
+b7.pack(side=LEFT,ipadx=15,fill=X)
+b7.bind("<Button-1>",click)
+b8=Button(f3,text="2",font="lucida 30 bold",bg="red",fg="white")
+b8.pack(side=LEFT,ipadx=15,fill=X)
+b8.bind("<Button-1>",click)
+b9=Button(f3,text="1",font="lucida 30 bold",bg="red",fg="white")
+b9.pack(side=LEFT,ipadx=15,fill=X)
+b9.bind("<Button-1>",click)
+f3.pack()
+
+f4=Frame(root,bg="grey")
+b10=Button(f4,text="+",font="lucida 30 bold",bg="red",fg="white")
+b10.pack(side=LEFT,ipadx=15,fill=X)
+b10.bind("<Button-1>",click)
+b11=Button(f4,text="*",font="lucida 30 bold",bg="red",fg="white")
+b11.pack(side=LEFT,ipadx=15,fill=X)
+b11.bind("<Button-1>",click)
+b12=Button(f4,text="-",font="lucida 30 bold",bg="red",fg="white")
+b12.pack(side=LEFT,ipadx=15,fill=X)
+b12.bind("<Button-1>",click)
+
+f4.pack()
+
+f5=Frame(root,bg="grey")
+b13=Button(f5,text="/",font="lucida 30 bold",bg="red",fg="white")
+b13.pack(side=LEFT,ipadx=15,fill=X)
+b13.bind("<Button-1>",click)
+b14=Button(f5,text=".",font="lucida 30 bold",bg="red",fg="white")
+b14.pack(side=LEFT,ipadx=15,fill=X)
+b14.bind("<Button-1>",click)
+b15=Button(f5,text="%",font="lucida 30 bold",bg="red",fg="white")
+b15.pack(side=LEFT,ipadx=15,fill=X)
+b15.bind("<Button-1>",click)
+
+f5.pack()
+
+f6=Frame(root,bg="grey")
+b16=Button(f6,text="C",font="lucida 30 bold",bg="red",fg="white")
+b16.pack(side=LEFT,ipadx=14,fill=X)
+b16.bind("<Button-1>",click)
+b18=Button(f6,text="=",font="lucida 30 bold",bg="red",fg="white")
+b18.pack(side=LEFT,ipadx=14)
+b18.bind("<Button-1>",click)
+f6.pack()
+
+root.mainloop()
