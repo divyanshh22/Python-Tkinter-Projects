@@ -2,7 +2,7 @@ from tkinter import*
 root=Tk()
 root.geometry("295x555")
 root.configure(bg="grey")
-root.title("Calculator ")
+root.title("Calculator by Divyansh ")
 def click(event):
     global scvalue
     text = event.widget.cget("text")
