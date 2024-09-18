@@ -1,0 +1,52 @@
+from tkinter import*
+
+import pyjokes
+
+root=Tk()
+root.geometry("800x200")
+root.title("Jokes gui application")
+
+icon=PhotoImage(file='jerry.png')
+root.iconphoto(True,icon)
+
+def submit(event):
+    global scvalue
+    text = event.widget.cget("text")
+    print(text)
+    if text == "New Jokes":
+        scvalue.set(pyjokes.get_joke())
+
+    else:
+        pass
+
+def click(event):
+    global scvalue
+    text = event.widget.cget("text")
+    print(text)
+    if text == "Clear":
+        scvalue.set("")
+
+    else:
+        pass
+
+
+scvalue=StringVar()
+scentry=Entry(root,textvariable=scvalue,font='lucida 10')
+scentry.pack(fill=X, ipadx=8,ipady=20, padx=10,pady=10)
+
+b1=Button(root,text='New Jokes')
+b1.pack(ipadx=20)
+b1.bind("<Button-1>",submit)
+
+b2=Button(root,text='Clear')
+b2.pack(padx=10,pady=10,ipadx=17)
+b2.bind("<Button-1>",click)
+
+b3=Button(root,text='Exit',command=root.destroy)
+b3.pack(ipadx=13)
+
+
+
+
+
+root.mainloop()
