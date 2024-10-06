@@ -1,0 +1,135 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
+from tkinter.messagebox import askyesno
+from tkcalendar import DateEntry
+import datetime
+
+
+def check_user_value():
+    name = nameentry.get()
+
+    if not name:
+        messagebox.showerror("Error", "Please provide your Name.")
+        return
+
+    if not validate_dropdowns():
+        return
+
+    is_confirmed = askyesno(title='Confirmation', message='Are you sure with this information?')
+
+    if is_confirmed:
+        save_user_info_to_file()
+
+
+def validate_dropdowns():
+    if selected_value.get() == "None":
+        messagebox.showerror("Error", "Please select a mode of transportation.")
+        return False
+
+    if selected_value2.get() == "None":
+        messagebox.showerror("Error", "Please select a 'From' location.")
+        return False
+    if selected_value5.get() == "None":
+        messagebox.showerror("Error", "Please select a 'To' location.")
+        return False
+
+    if selected_value2.get() == selected_value5.get():
+        messagebox.showerror("Error", "'From' and 'To' locations cannot be the same.")
+        return False
+
+    if selected_value4.get() == "None":
+        messagebox.showerror("Error", "Please select a payment method.")
+        return False
+
+    return True
+
+
+def save_user_info_to_file():
+    name = nameentry.get()
+    transportation = selected_value.get()
+    from_location = selected_value2.get()
+    to_location = selected_value5.get()
+    travel_date = calentry.get()
+    payment_method = selected_value4.get()
+
+    user_info = (
+        f"Name: {name}\n"
+        f"Transportation: {transportation}\n"
+        f"From: {from_location}\n"
+        f"To: {to_location}\n"
+        f"Date of Travel: {travel_date}\n"
+        f"Payment Method: {payment_method}\n"
+        f"Submitted On: {datetime.datetime.now()}\n"
+        "------------------------\n"
+    )
+
+    with open("user_info.txt", "a") as file:
+        file.write(user_info)
+
+    messagebox.showinfo("Success", "Your information has been saved successfully!")
+
+
+root = Tk()
+root.geometry("340x400")
+root.title("Travel Form By Divyansh")
+root.configure(bg="#f0f0f0")  # Background color
+
+
+title_label = Label(root, text="Travel Booking Form", font=("Helvetica", 16, "bold"), bg="#4CAF50", fg="white", pady=10)
+title_label.grid(row=0, column=0, columnspan=3, sticky="ew")
+
+
+main_frame = Frame(root, padx=20, pady=20, bg="#f0f0f0")
+main_frame.grid(row=1, column=0, columnspan=3)
+
+
+l1 = Label(main_frame, text="Name:", font=("Arial", 12), bg="#f0f0f0")
+namevalue = StringVar()
+nameentry = Entry(main_frame, textvariable=namevalue, font=("Arial", 10), width=25)
+l1.grid(row=0, column=0, sticky="w", pady=10)
+nameentry.grid(row=0, column=1, padx=10, pady=10)
+
+
+l2 = Label(main_frame, text="Transportation:", font=("Arial", 12), bg="#f0f0f0")
+tvalue = StringVar()
+selected_value = StringVar(value="None")
+dropdown = ttk.OptionMenu(main_frame, selected_value, "None", "Train", "Car")
+l2.grid(row=1, column=0, sticky="w", pady=10)
+dropdown.grid(row=1, column=1, padx=10, pady=10)
+
+
+l3 = Label(main_frame, text="From:", font=("Arial", 12), bg="#f0f0f0")
+selected_value2 = StringVar(value="None")
+dropdown2 = ttk.OptionMenu(main_frame, selected_value2, "None", "Jabalpur", "Bhopal", "Delhi")
+l3.grid(row=2, column=0, sticky="w", pady=10)
+dropdown2.grid(row=2, column=1, padx=10, pady=10)
+
+
+l4 = Label(main_frame, text="To:", font=("Arial", 12), bg="#f0f0f0")
+selected_value5 = StringVar(value="None")
+dropdown5 = ttk.OptionMenu(main_frame, selected_value5, "None", "Jabalpur", "Delhi", "Nagpur")
+l4.grid(row=3, column=0, sticky="w", pady=10)
+dropdown5.grid(row=3, column=1, padx=10, pady=10)
+
+
+l4 = Label(main_frame, text="Date:", font=("Arial", 12), bg="#f0f0f0")
+calentry = DateEntry(main_frame, width=18, year=2024, month=10, day=6, background='darkblue', foreground='white',
+                     borderwidth=2)
+l4.grid(row=4, column=0, sticky="w", pady=10)
+calentry.grid(row=4, column=1, padx=10, pady=10)
+
+
+l5 = Label(main_frame, text="Payment:", font=("Arial", 12), bg="#f0f0f0")
+selected_value4 = StringVar(value="None")
+dropdown4 = ttk.OptionMenu(main_frame, selected_value4, "None", "UPI", "CASH", "CARD")
+l5.grid(row=5, column=0, sticky="w", pady=10)
+dropdown4.grid(row=5, column=1, padx=10, pady=10)
+
+
+b1 = Button(main_frame, text="Submit", command=check_user_value, font=("Arial", 12, "bold"), bg="#4CAF50", fg="white",
+            padx=10, pady=5)
+b1.grid(row=6, column=1, pady=20)
+
+root.mainloop()
+
