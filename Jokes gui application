@@ -3,6 +3,7 @@ import pyjokes
 
 root = Tk()
 root.geometry("600x300")
+
 root.title("Jokes GUI Application")
 
 try:
