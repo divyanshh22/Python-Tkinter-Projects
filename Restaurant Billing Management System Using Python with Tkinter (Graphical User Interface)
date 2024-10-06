@@ -10,7 +10,7 @@ class Bill_App:
         self.root.configure(bg="#0A7CFF")
         self.root.title("Resturent Billing System")
         title=Label(self.root,text="Resturent Billing System",bd=12,relief=RIDGE,font=("Arial Black",20),bg="#A569BD",fg="white").pack(fill=X)
-        #===================================variables=======================================================================================
+   
         self.nutella=IntVar()
         self.noodles=IntVar()
         self.lays=IntVar()
